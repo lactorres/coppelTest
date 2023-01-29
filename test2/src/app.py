@@ -23,7 +23,7 @@ def loginUser():
     payload = request.get_json()
     return usersApiService.loginUser(payload)
 
-@app.route('/users', methods=['post'])
+@app.route('/users', methods=['get'])
 def getUser():
     return usersApiService.getUser()
 
