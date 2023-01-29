@@ -1,8 +1,10 @@
-PUBLIC_KEY = "0485946f992426c58cba3c0d5d6bb823"
-PRIVATE_KEY = "c19ae992eeaa5ebd439c9ea4b96efc631cc2894b"
+import os
+
 CHARACTERS = "characters"
 COMICS = "comics"
-API_ENDPOINT = "https://gateway.marvel.com:443/v1/public/"
+PUBLIC_KEY = os.environ['PUBLIC_KEY']
+PRIVATE_KEY = os.environ['PRIVATE_KEY']
+API_ENDPOINT = os.environ['API_ENDPOINT']
 CHARACTERS_PARAM = "&nameStartsWith="
 COMICS_PARAM = "&titleStartsWith="
 

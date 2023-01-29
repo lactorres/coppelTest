@@ -46,7 +46,8 @@ class MarvelApiService():
                     'id': comics['id'],
                     'title': comics['title'],
                     'image':comics['thumbnail']['path'] +"." + comics['thumbnail']['extension'],
-                    'onSaleDate':onSaleDate[0]["date"]
+                    'onSaleDate':onSaleDate[0]["date"],
+                    "issueNumber": comics['issueNumber']
                 }
                 characters.append(itemCharacter)
             
