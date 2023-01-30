@@ -1,0 +1,462 @@
+{
+	"info": {
+		"_postman_id": "5f9546a8-3450-4b9e-a1e6-852b1f951cdb",
+		"name": "coppel",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19235336"
+	},
+	"item": [
+		{
+			"name": "test1",
+			"item": [
+				{
+					"name": "searchComics",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/searchComics",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"searchComics"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "searchComics/searchTerm",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/searchComics/spider-man",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"searchComics",
+								"spider-man"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "byCharacterName",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/searchComics/byCharacterName/spider-man",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"searchComics",
+								"byCharacterName",
+								"spider-man"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "byComicName",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/searchComics/byComicName/Spider-Man: The Lost Hunt?issueNumber=1",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"searchComics",
+								"byComicName",
+								"Spider-Man: The Lost Hunt"
+							],
+							"query": [
+								{
+									"key": "issueNumber",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "test2",
+			"item": [
+				{
+					"name": "users/register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"prueba2@saludos.com\",\n    \"password\": \"passw0rd\",\n    \"name\": \"Luis\",\n    \"age\": \"30\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3001/users/register",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"users",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "users/login",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"try{",
+									"    let response = JSON.parse(responseBody);",
+									"    pm.collectionVariables.set(\"auth\", response.access_token);",
+									"    console.log(\"auth set\", response.access_token)",
+									"}catch(err) {",
+									"    console.error(\"Unable to set/get variables\",err);",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"prueba2@saludos.com\",\n    \"password\": \"passw0rd\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3001/users/login",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"users",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "users",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"prueba@saludos.com\",\n    \"password\": \"passw0rd\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3001/users",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "test3",
+			"item": [
+				{
+					"name": "addToLayaway",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Spider-Man: The Lost Hunt\",\n    \"issueNumber\": \"2\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3002/addToLayaway",
+							"host": [
+								"localhost"
+							],
+							"port": "3002",
+							"path": [
+								"addToLayaway"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "test4",
+			"item": [
+				{
+					"name": "getLayawayList",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3003/getLayawayList",
+							"host": [
+								"localhost"
+							],
+							"port": "3003",
+							"path": [
+								"getLayawayList"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getLayawayList?orderByTitle=asc",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3003/getLayawayList?orderByTitle=asc",
+							"host": [
+								"localhost"
+							],
+							"port": "3003",
+							"path": [
+								"getLayawayList"
+							],
+							"query": [
+								{
+									"key": "orderByTitle",
+									"value": "asc"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getLayawayList?orderByTitle=desc",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3003/getLayawayList?orderByTitle=desc",
+							"host": [
+								"localhost"
+							],
+							"port": "3003",
+							"path": [
+								"getLayawayList"
+							],
+							"query": [
+								{
+									"key": "orderByTitle",
+									"value": "desc"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getLayawayList?orderByIssueNumber=asc",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3003/getLayawayList?orderByIssueNumber=asc",
+							"host": [
+								"localhost"
+							],
+							"port": "3003",
+							"path": [
+								"getLayawayList"
+							],
+							"query": [
+								{
+									"key": "orderByIssueNumber",
+									"value": "asc"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getLayawayList?orderByIssueNumber=desc",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3003/getLayawayList?orderByIssueNumber=desc",
+							"host": [
+								"localhost"
+							],
+							"port": "3003",
+							"path": [
+								"getLayawayList"
+							],
+							"query": [
+								{
+									"key": "orderByIssueNumber",
+									"value": "desc"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "auth",
+			"value": ""
+		}
+	]
+}
